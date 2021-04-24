@@ -27,10 +27,8 @@
                     <b-nav-item href="{{route('register')}}">Registrarse</b-nav-item>
                     @else  
                     <b-nav-item-dropdown text="Username" right>
-                      <b-dropdown-item href="#">Cerrar sesion</b-dropdown-item>
+                      <b-dropdown-item >Cerrar sesion</b-dropdown-item>
                     </b-nav-item-dropdown>
-              
-                    
                     @endguest
                     <!-- Navbar dropdowns -->
                     
