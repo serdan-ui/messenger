@@ -4,10 +4,19 @@
 <b-container>
     <b-row align-h="center">
         <b-col cols="8" >
-          <b-card title="Inicio de sesion">
-             <b-alert show>Por favor ingresa tus datos :</b-alert>
+          <b-card title="Inicio de sesion" class="my-3">
+             @if ($errors->any())
+              <b-alert show variant="danger">
+                <ul class="mb-0">
+                  @foreach ($errors->all() as $error )
+                    <li>{{$error}}</li>
+                  @endforeach
+                </ul>
+             </b-alert>
+               @else <b-alert show variant="primary">Por favor ingresa tus datos :</b-alert>
+             @endif
 
-                <b-form class="form-horizontal" method="POST" action="{{ route('login') }}">
+                <b-form  method="POST" action="{{ route('login') }}">
                     {{ csrf_field() }}
 
 
@@ -19,6 +28,7 @@
                     <b-form-input
                       id="email"
                       type="email"
+                      name="email"
                       value="{{ old('email') }}"
                       autofocus
                       placeholder="Ingresa aqui tu correo"
@@ -28,18 +38,18 @@
                   
                   <b-form-group
                   label="Contraseña:"
-                  label-for="email"
+                  label-for="password"
                 >
                   <b-form-input
                     id="password"
                     type="password"
-                    value="{{ old('password') }}"
+                    name="password"
                     required
                   ></b-form-input>
                 </b-form-group>
                 <b-form-group>
                     <b-form-checkbox
-                    v-model="status"
+                   
                     name="remember"
                     {{ old('remember') ? 'checked="true"' : '' }}
                   >
