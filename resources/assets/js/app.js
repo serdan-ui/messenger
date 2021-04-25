@@ -10,7 +10,9 @@ Vue.use(IconsPlugin)
 
 
 
-Vue.component('example-component', require('./components/ExampleComponent.vue'));
+Vue.component('ContactComponent', require('./components/ContactComponent.vue'));
+Vue.component('contact-list', require('./components/ContactListComponent.vue'));
+Vue.component('ActiveConversation', require('./components/ActiveConversationComponent.vue'));
 
 const app = new Vue({
     el: '#app',
