@@ -10,6 +10,7 @@ Vue.use(IconsPlugin)
 
 
 
+Vue.component('message-conversation', require('./components/MessageConversationComponent.vue'));
 Vue.component('ContactComponent', require('./components/ContactComponent.vue'));
 Vue.component('contact-list', require('./components/ContactListComponent.vue'));
 Vue.component('ActiveConversation', require('./components/ActiveConversationComponent.vue'));

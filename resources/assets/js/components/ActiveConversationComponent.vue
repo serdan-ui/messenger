@@ -7,31 +7,19 @@
                     title="Conversation activa"
                     class="h-100"
                     >
-                    <b-media vertical-align="center" class="mb-2">
-                        <template #aside>
-                        <b-img rounded="circle" blank blank-color="#ccc" width="48" alt="placeholder"></b-img>
-                        </template>
-                        <b-card >
-                        Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin.
-                        Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac
-                        nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-                        </b-card>
-                    </b-media>
-                    <b-media right-align vertical-align="center" class="mb-2">
-                        <template #aside>
-                        <b-img rounded="circle" blank blank-color="#ccc" width="48" alt="placeholder"></b-img>
-                        </template>
-                        <b-card >
-                        Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin.
-                        </b-card>
-                    </b-media>
+                    <message-conversation v-for="message in messages" :key="message.id" :writeen-by-me="message.written_by_me">
+                        {{message.content}}
+                    </message-conversation>
                     <div slot="footer"> 
-                        <b-form class="mb-0">
+                        <b-form @submit.prevent="postMessage" class="mb-0" autocomplete='off'>
                             <b-input-group>
-                                    <b-form-input type="text" placeholder="Escribe un mensaje ..." class="text-center">
+                                    <b-form-input type="text" 
+                                    placeholder="Escribe un mensaje ..." 
+                                    v-model="newMessage"
+                                    class="text-center">
                                     </b-form-input>
                                 <b-input-group-append>
-                                    <b-btn variant="primary">Enviar</b-btn>
+                                    <b-button type="submit" variant="primary">Enviar</b-button>
                                 </b-input-group-append>    
                             </b-input-group>
                         </b-form>
@@ -51,7 +39,35 @@
 
 <script>
     export default {
-        name:'ActiveConversation'
+        name:'ActiveConversation',
+        data() {
+            return {
+            messages: [],
+            newMessage :''  
+            }
+        },
+        methods: {
+           getMessages() {
+                axios.get('/api/messages')
+                    .then((response) => this.messages = response.data)
+           },
+           postMessage() {
+               const params = {
+                   to_id:2,
+                   content: this.newMessage
+               }
+               axios.post('/api/messages', params )
+               .then(resp => {;
+               if(resp.data.success){
+                   this.newMessage = '';
+                   this.getMessages()
+               }
+               })
+           }
+        },
+        mounted() {
+          this.getMessages()
+        },
     }
 </script>
 
