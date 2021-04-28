@@ -5,11 +5,11 @@
                 <b-img v-bind="{ blank: true, blankColor: '#777', width: 75, height: 75, class: 'm1' }" rounded="circle" alt="Circle image"></b-img>
             </b-col>
             <b-col cols="6" align-self="center d-none d-md-block" >
-                <p class="mb-1">{{name}}</p>
-                <p class="mb-1 text-muted small">{{lastMessage}}</p>
+                <p class="mb-1">{{conversation.contact_name}}</p>
+                <p class="mb-1 text-muted small">{{conversation.last_message}}</p>
             </b-col>
             <b-col cols="3" class="d-none d-md-block">
-                <p class="text-muted small">{{lastTime}}</p>
+                <p class="text-muted small">{{conversation.last_time}}</p>
             </b-col>
         </b-row>
     </b-list-group-item>
@@ -18,14 +18,12 @@
 <script>
     export default {
         name:'ContactComponent',
-        props:[
-            'variant'
-        ],
+        props:{
+            variant: String,
+            conversation : Object
+        },
         data(){
             return{
-                name: 'Martin Jerez',
-                lastMessage: 'Tu: Hola',
-                lastTime: '1:37 pm',
             } 
         }
     }

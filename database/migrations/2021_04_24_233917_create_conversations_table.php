@@ -20,8 +20,8 @@ class CreateConversationsTable extends Migration
             $table->foreign('user_id')->references('id')->on('users');
             
             //contacto
-            $table->unsignedInteger('contacto_id');
-            $table->foreign('contacto_id')->references('id')->on('users');
+            $table->unsignedInteger('contact_id');
+            $table->foreign('contact_id')->references('id')->on('users');
             //last message
             $table->text('last_message')->nullable();
             //time
